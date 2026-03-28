@@ -12,7 +12,7 @@ const ModalCard = ({ item, setCart, cart, handleRemove }) => {
         setCart([...cart, item])
         toast.success(`${item.name} successfuly added to cart`, {
             position: "top-center",
-            autoClose: 2000,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: false,
             pauseOnHover: true,
@@ -24,74 +24,70 @@ const ModalCard = ({ item, setCart, cart, handleRemove }) => {
     }
 
     return (
-        <div className="bg-white  transition duration-300 overflow-hidden group ">
-            {/* Discount Badge */}
-            <div className="absolute mt-3 ml-3 bg-red-500 text-white text-xs px-2 py-1 rounded-md z-10">
-                -10%
-            </div>
-
-            {/* Image */}
-            <div className="bg-gray-100 h-44 flex items-center justify-center overflow-hidden">
+        <div className="group bg-white rounded-2xl  hover:border-blue-500/30 transition-all duration-300 overflow-hidden flex flex-col h-full">
+            {/* Image Section - Ektu padding add kora hoyeche */}
+            <div className="relative bg-gray-50/50 p-6 h-48 flex items-center justify-center overflow-hidden">
+                {/* Discount Badge */}
+                <div className="absolute top-3 left-3 bg-rose-500 text-white text-[10px] font-bold px-2 py-1 rounded-lg z-10 shadow-sm">
+                    -10%
+                </div>
                 <img
                     src={item.image}
                     alt={item.name}
-                    className="h-32 object-contain transition duration-300 group-hover:scale-110"
+                    className="h-full object-contain transition duration-500 group-hover:scale-110"
                 />
             </div>
-
             {/* Content */}
-            <div className="p-4 space-y-2">
+            <div className="p-4 flex flex-col flex-grow">
+                {/* Category + Brand */}
+                <div className="flex justify-between items-center mb-1">
+                    <span className="text-[10px] text-blue-600 font-bold uppercase tracking-wider">{item.category}</span>
+                    <span className="text-[11px] font-medium text-gray-700">Brand: {item.brand}</span>
+                </div>
 
                 {/* Title */}
-                <h2 className="text-sm font-semibold text-gray-800 ">
+                <h2 className="text-sm font-bold text-gray-800 line-clamp-2 min-h-[40px] group-hover:text-blue-600 transition-colors">
                     {item.name}
                 </h2>
-
-                {/* Description */}
-                <p className="text-xs text-gray-500 line-clamp-2">
-                    {item.description}
-                </p>
+                <p className='text-gray-600'>{item.description}</p>
 
                 {/* Rating */}
-                <div className="flex items-center gap-1 text-yellow-500 text-xs">
-                    {"*".repeat(Math.floor(item.rating))}
-                    <span className="text-gray-500 ml-1">({item.rating})</span>
+                <div className="flex items-center gap-1 text-amber-400 text-xs mt-1">
+                    {"★".repeat(Math.floor(item.rating))}
+                    <span className="text-gray-400 font-medium ml-0.5">({item.rating})</span>
                 </div>
 
-                {/* Price */}
-                <div className="flex items-center gap-2">
-                    <p className="text-lg font-bold text-black">
-                        ৳ {item.price}
+                {/* Price - Ektu bold look */}
+                <div className="flex items-center gap-2 mt-3 mb-4">
+                    <p className="text-xl font-black text-gray-900">
+                        ৳{item.price}
                     </p>
-                    <p className="text-sm text-gray-400 line-through">
-                        ৳ {Math.round(item.price * 1.1)}
+                    <p className="text-xs text-gray-400 line-through">
+                        ৳{Math.round(item.price * 1.1)}
                     </p>
                 </div>
 
-                {/* Stock */}
-                <p className="text-xs text-gray-400">
-                    Stock: {item.stock}
-                </p>
+                {/* Button - Full focus e */}
 
-                {/* Button */}
-                {
-                    item.id
-                }
-
-                <form method="dialog">
-
-                    {
-                        !isExist ? <button
-                            onClick={handleAddCart}
-                            className="w-full mt-2 bg-black text-white py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition">
-                            Add to Cart
-                        </button> : <button
-                            onClick={() => handleRemove(item)}
-                            className="w-full mt-2 bg-black text-white py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition"> Remove from Cart </button>
-                    }
-
+                <form method="dialog" >
+                    <div className="mt-auto">
+                        {
+                            !isExist ? (
+                                <button
+                                    onClick={handleAddCart}
+                                    className="w-full bg-gray-900 text-white py-2.5 rounded-xl text-xs font-bold hover:bg-blue-600 transition-all active:scale-95">
+                                    ADD TO CART
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => handleRemove(item)}
+                                    className="w-full bg-rose-50 text-rose-600 py-2.5 rounded-xl text-xs font-bold hover:bg-rose-500 hover:text-white transition-all active:scale-95">
+                                    REMOVE ITEM
+                                </button>
+                            )
+                        }
+                    </div>
                 </form>
-
             </div>
         </div>
     );

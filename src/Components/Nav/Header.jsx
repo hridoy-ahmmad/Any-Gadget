@@ -39,11 +39,16 @@ const Header = ({ cart, handleRemove, setCart }) => {
         }
     }
 
-    let total = 0
-    for (let item of cart) {
-        total = total + item.price
-    }
-    console.log(total);
+
+    // let total = 0
+    // for (let item of cart) {
+    //     total = total + item.price
+    // }
+
+    const total = cart.reduce((total, item) => {
+        return total + item.price
+    }, 0)
+
 
     return (
         <div className="mx-auto">
@@ -56,11 +61,10 @@ const Header = ({ cart, handleRemove, setCart }) => {
                         <li><a>Home</a></li>
                         <li><a>Shop</a></li>
                         <li><a>Collection</a></li>
-                        <li><a>Page</a></li>
                     </ul>
                     <div className='relative'>
-                        <label htmlFor="my-drawer-5" className="drawer-button text-3xl text-red-600 "><HiOutlineShoppingCart className='md:ml-10 ' /></label>
-                        <p className='absolute -right-5 bg-red-600    text-gray-100 rounded-full px-2 -top-2 text-sm '>{cart.length} </p>
+                        <label htmlFor="my-drawer-5" className="drawer-button text-3xl text-red-600 "><HiOutlineShoppingCart className='md:ml-10 ml-3' /></label>
+                        <p className='absolute -right-5 bg-red-600  text-gray-100 rounded-full px-2 -top-2 text-sm '>{cart.length} </p>
                     </div>
                 </div>
             </div>
@@ -81,7 +85,7 @@ const Header = ({ cart, handleRemove, setCart }) => {
                                     <BiShoppingBag />
                                 </div>
                                 <p> Your cart is empty! Add some products to get started.</p>
-                            </div> : cart.map(item => <CartItem handleRemove={handleRemove} setCart={setCart} cart={cart} item={item}></CartItem>)
+                            </div> : cart.map((item, index) => <CartItem key={item.id} handleRemove={handleRemove} setCart={setCart} cart={cart} item={item} index={index}></CartItem>)
                         }
                         <hr className='text-gray-400' />
                         <div className='flex justify-between py-2'>

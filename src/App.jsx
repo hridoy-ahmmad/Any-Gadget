@@ -1,9 +1,11 @@
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import './App.css'
 import Accesories from './Components/Accesories/Accesories'
 import Header from './Components/Nav/Header'
 import { Bounce, toast } from 'react-toastify'
+import Loading from './Components/Loading'
+import Footer from './Components/Footer/Footer'
 
 
 
@@ -36,8 +38,11 @@ function App() {
 
   return (
     <div>
-      <Header handleRemove={handleRemove} cart={cart} setCart={setCart}></Header>
-      <Accesories dataPromise={dataPromise} handleRemove={handleRemove} cart={cart} setCart={setCart}></Accesories>
+      <Suspense fallback={<Loading></Loading>}>
+        <Header handleRemove={handleRemove} cart={cart} setCart={setCart}></Header>
+        <Accesories dataPromise={dataPromise} handleRemove={handleRemove} cart={cart} setCart={setCart}></Accesories>
+        <Footer></Footer>
+      </Suspense>
     </div>
   )
 }

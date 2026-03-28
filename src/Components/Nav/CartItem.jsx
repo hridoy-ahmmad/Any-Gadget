@@ -1,12 +1,15 @@
 import React from 'react';
 
-const CartItem = ({ item, handleRemove }) => {
+const CartItem = ({ item, handleRemove, index }) => {
 
 
     return (
         <div className=" items-center p-2 justify-between bg-white rounded shadow-sm mb-3 hover:shadow-md transition duration-300 relative">
             {/* Product Info */}
             <div className="flex items-center  gap-3">
+
+                <p> {index + 1}.</p>
+
                 <div className="flex items-center justify-between ">
                     <img
                         src={item.image}
