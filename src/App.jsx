@@ -15,11 +15,15 @@ const dataPromise = fetchPromise()
 function App() {
   const [cart, setCart] = useState([])
 
+  // const handleRemove = (item) => {
+  //   const filtered = cart.filter(i => i.id !== item.id)
+  //   setCart(filtered)
 
+  // }
 
   return (
     <div>
-      <Header cart={cart}></Header>
+      <Header  cart={cart} setCart={setCart}></Header>
       <Accesories dataPromise={dataPromise} cart={cart} setCart={setCart}></Accesories>
     </div>
   )

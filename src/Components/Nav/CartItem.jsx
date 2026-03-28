@@ -1,7 +1,10 @@
 import React from 'react';
 
-const CartItem = ({ item }) => {
-    console.log(item);
+const CartItem = ({ item, setCart ,cart}) => {
+    const handleRemove = () => {
+        const filtered = cart.filter(i => i.id !== item.id)
+          setCart(filtered)
+    }
 
     return (
         <div className=" items-center p-2 justify-between bg-white rounded shadow-sm mb-3 hover:shadow-md transition duration-300 relative">
@@ -21,12 +24,11 @@ const CartItem = ({ item }) => {
                         </div>
                     </div>
                 </div>
-
-
             </div>
-
             {/* Remove Button */}
-            <button className="absolute top-1 right-3 hover:text-bold hover:text-red-500  font-semibold  cursor-pointer">
+            <button
+                onClick={handleRemove}
+                className="absolute top-1 right-3 hover:text-bold hover:text-red-500  font-semibold  cursor-pointer">
                 ✕
             </button>
         </div>

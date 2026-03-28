@@ -5,7 +5,7 @@ import CartItem from './CartItem';
 import { BiShoppingBag } from 'react-icons/bi';
 
 
-const Header = ({ cart }) => {
+const Header = ({ cart, handleRemove, setCart }) => {
     console.log(cart);
 
     return (
@@ -44,12 +44,13 @@ const Header = ({ cart }) => {
                                     <BiShoppingBag />
                                 </div>
                                 <p> Your cart is empty! Add some products to get started.</p>
-                            </div> : cart.map(item => <CartItem item={item}></CartItem>)
+                            </div> : cart.map(item => <CartItem handleRemove={handleRemove} setCart={setCart} cart={cart} item={item}></CartItem>)
                         }
                     </ul>
-                    <hr />
+
                 </div>
             </div>
+            <p>ric</p>
         </div>
     );
 };
