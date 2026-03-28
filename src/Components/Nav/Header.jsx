@@ -6,7 +6,13 @@ import { BiShoppingBag } from 'react-icons/bi';
 
 
 const Header = ({ cart, handleRemove, setCart }) => {
-    console.log(cart);
+    // console.log(cart);
+
+    let total = 0
+    for (let item of cart) {
+        total = total + item.price
+    }
+    console.log(total);
 
     return (
         <div className="mx-auto">
@@ -46,11 +52,20 @@ const Header = ({ cart, handleRemove, setCart }) => {
                                 <p> Your cart is empty! Add some products to get started.</p>
                             </div> : cart.map(item => <CartItem handleRemove={handleRemove} setCart={setCart} cart={cart} item={item}></CartItem>)
                         }
+                        <hr className='text-gray-400' />
+                        <div className='flex justify-between py-2'>
+                            <p>Total Costs:</p>
+                            <p>{total} tk</p>
+                        </div>
+                        <button 
+                        
+                        className='bg-red-400 hover:bg-red-500 transition duration-200 py-2 rounded-md  mt-1'> Proceed to checkout</button>
                     </ul>
 
                 </div>
+
             </div>
-            <p>ric</p>
+
         </div>
     );
 };

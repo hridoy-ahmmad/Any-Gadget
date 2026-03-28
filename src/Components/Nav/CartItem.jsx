@@ -1,9 +1,9 @@
 import React from 'react';
 
-const CartItem = ({ item, setCart ,cart}) => {
+const CartItem = ({ item, cart, setCart }) => {
     const handleRemove = () => {
         const filtered = cart.filter(i => i.id !== item.id)
-          setCart(filtered)
+        setCart(filtered)
     }
 
     return (
