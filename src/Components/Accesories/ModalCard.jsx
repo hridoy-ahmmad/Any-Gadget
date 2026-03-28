@@ -1,6 +1,8 @@
 import React from 'react';
+import { FcRating } from 'react-icons/fc';
+import { Bounce, toast } from 'react-toastify';
 
-const ModalCard = ({ item, setCart, cart }) => {
+const ModalCard = ({ item, setCart, cart, handleRemove }) => {
 
     const isExist = cart.find(i => i.id === item.id)
     const handleAddCart = () => {
@@ -8,6 +10,17 @@ const ModalCard = ({ item, setCart, cart }) => {
             return
         }
         setCart([...cart, item])
+        toast.success(`${item.name} successfuly added to cart`, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+        });
     }
 
     return (
@@ -41,7 +54,7 @@ const ModalCard = ({ item, setCart, cart }) => {
 
                 {/* Rating */}
                 <div className="flex items-center gap-1 text-yellow-500 text-xs">
-                    {"⭐".repeat(Math.floor(item.rating))}
+                    {"*".repeat(Math.floor(item.rating))}
                     <span className="text-gray-500 ml-1">({item.rating})</span>
                 </div>
 
@@ -72,7 +85,9 @@ const ModalCard = ({ item, setCart, cart }) => {
                             onClick={handleAddCart}
                             className="w-full mt-2 bg-black text-white py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition">
                             Add to Cart
-                        </button> : <button className="w-full mt-2 bg-black text-white py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition"> Remove from Cart </button>
+                        </button> : <button
+                            onClick={() => handleRemove(item)}
+                            className="w-full mt-2 bg-black text-white py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition"> Remove from Cart </button>
                     }
 
                 </form>

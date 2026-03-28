@@ -3,10 +3,41 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { HiOutlineShoppingCart } from 'react-icons/hi';
 import CartItem from './CartItem';
 import { BiShoppingBag } from 'react-icons/bi';
+import { Bounce, toast } from 'react-toastify';
 
 
 const Header = ({ cart, handleRemove, setCart }) => {
     // console.log(cart);
+
+    const handleProceed = () => {
+
+        if (cart.length == 0) {
+            toast.info('no item added to cart', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+            });
+        } else {
+            setCart([])
+            toast.success(`Proceed Successful`, {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+            });
+        }
+    }
 
     let total = 0
     for (let item of cart) {
@@ -57,9 +88,9 @@ const Header = ({ cart, handleRemove, setCart }) => {
                             <p>Total Costs:</p>
                             <p>{total} tk</p>
                         </div>
-                        <button 
-                        
-                        className='bg-red-400 hover:bg-red-500 transition duration-200 py-2 rounded-md  mt-1'> Proceed to checkout</button>
+                        <button
+                            onClick={handleProceed}
+                            className='bg-red-400 hover:bg-red-500 transition duration-200 py-2 rounded-md  mt-1'> Proceed to checkout</button>
                     </ul>
 
                 </div>

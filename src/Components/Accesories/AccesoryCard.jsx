@@ -1,9 +1,9 @@
 import React from 'react';
 import ModalCard from './ModalCard';
 
-const AccesoryCard = ({ item, setCart, cart }) => {
+const AccesoryCard = ({ item, setCart, cart, handleRemove }) => {
     // console.log(item);
-     const isExist = cart.find(i => i.id === item.id)
+    const isExist = cart.find(i => i.id === item.id)
     return (
         <div
             onClick={() => document.getElementById(`my_modal_${item.id}`).showModal()}
@@ -50,7 +50,7 @@ const AccesoryCard = ({ item, setCart, cart }) => {
                         <button className="btn btn-sm text-2xl btn-circle btn-ghost absolute right-2 top-2 m-5">✕</button>
                     </form>
                     {/* main Info */}
-                    <ModalCard item={item} cart={cart} setCart={setCart} />
+                    <ModalCard item={item} handleRemove={handleRemove} cart={cart} setCart={setCart} />
                 </div>
             </dialog>
         </div>
